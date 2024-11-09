@@ -98,7 +98,7 @@ Bevy code:
 commands.spawn(I18nText::new("messages.hello").with_arg("name", "world"));
 ```
 
-## Dynamic Fonts
+### Dynamic Fonts
 
 Dynamic fonts enable this plugin to automatically switch between different fonts based on the current locale. For example, since Japanese and English languages have different character sets, you may want to use different fonts for each language. In order to make use of dynamic font, you must follow the file structure mentioned above.
 
@@ -122,6 +122,16 @@ commands.spawn((I18nText::new("hello"), I18nFont::new("NotoSans")))
 ```
 
 When the locale is set to `ja`, the font will be set to `ja.ttf`. If the locale is set to `zh-TW`, the font automatically load `zh.ttf`, since `zh-TW` does not have a font file. If the locale is set to any other locale, Bevy will load `fallback.ttf`.
+
+### Automatic Text Re-Rendering
+
+When the locale is changed, the plugin will automatically update all `I18nText` components to reflect the new locale. No boilerplate code is required, other than changing the locale using the `I18n` resource.
+
+```rust
+fn change_locale(mut i18n: ResMut<I18n>) {
+    i18n.set_locale("zh-TW");
+}
+```
 
 ## Bevy support table
 
