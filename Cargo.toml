@@ -1,0 +1,39 @@
+[package]
+name = "bevy_i18n"
+version = "0.1.0"
+edition = "2021"
+authors = ["TurtIeSocks"]
+license = "MIT OR Apache-2.0"
+description = "Bevy i18n plugin"
+repository = "https://github.com/TurtIeSocks/bevy_i18n"
+homepage = "https://github.com/TurtIeSocks/bevy_i18n"
+keywords = ["bevy", "gamedev", "i18n", "localization"]
+categories = ["game-development", "localization"]
+readme = "./README.md"
+exclude = ["assets/"]
+
+[dependencies]
+bevy = { git = "https://github.com/bevyengine/bevy", branch = "main", default-features = false, features = [
+  "bevy_ui",
+] }
+rust-i18n = "3"
+
+[dev-dependencies]
+bevy = { git = "https://github.com/bevyengine/bevy", branch = "main" }
+rust-i18n = "3"
+# bevy-inspector-egui = { git = "https://github.com/Vrixyz/bevy-inspector-egui.git", branch = "bevy_0.15" }
+
+[build-dependencies]
+cargo-emit = "0.2.1"
+
+[[example]]
+name = "basic"
+path = "examples/basic.rs"
+
+[[example]]
+name = "interpolation"
+path = "examples/interpolation.rs"
+
+[[example]]
+name = "changing_locale"
+path = "examples/changing_locale.rs"
