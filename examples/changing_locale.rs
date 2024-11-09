@@ -12,7 +12,6 @@ fn main() {
 }
 
 fn setup(mut commands: Commands, i18n_res: Res<I18n>) {
-    info!("{:?}", i18n_res);
     commands.spawn(Camera2d::default());
     commands
         .spawn(Node {

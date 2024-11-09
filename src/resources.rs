@@ -62,21 +62,21 @@ impl FontFolder {
         let locale: String = locale.into();
         let mut locale = locale.as_str();
 
-        bevy::log::info!("Evaluating font for {} locale", locale);
+        bevy::log::debug!("Evaluating font for {} locale", locale);
         while !locale.is_empty() {
             if let Some(font) = self.fonts.get(locale) {
-                bevy::log::info!("Font for {} locale found", locale);
+                bevy::log::debug!("Font for {} locale found", locale);
                 return font.clone();
             }
             if let Some(index) = locale.rfind('-') {
-                bevy::log::info!("Font for {} locale was not found", locale);
+                bevy::log::debug!("Font for {} locale was not found", locale);
                 locale = &locale[..index];
             } else {
                 break;
             }
         }
 
-        bevy::log::info!("Returning the fallback font");
+        bevy::log::debug!("Returning the fallback font");
         self.fallback.clone()
     }
 }
@@ -90,7 +90,7 @@ pub(crate) struct FontManager {
 impl FontManager {
     pub(crate) fn insert(&mut self, family: impl Into<String>, font_folder: FontFolder) {
         let family: String = family.into();
-        bevy::log::info!("Font family {} added", family);
+        bevy::log::debug!("Font family {} added", family);
         self.fonts.insert(family, font_folder);
     }
 
