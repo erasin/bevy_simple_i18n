@@ -104,7 +104,7 @@ impl FontFolder {
 #[derive(Debug, Reflect, Default, Resource)]
 #[reflect(Resource)]
 pub(crate) struct FontManager {
-    fonts: HashMap<String, FontFolder>,
+    pub(crate) fonts: HashMap<String, FontFolder>,
 }
 
 impl FontManager {
@@ -116,9 +116,17 @@ impl FontManager {
 
     pub(crate) fn get(&self, family: &str, locale: Option<String>) -> Handle<Font> {
         let locale = locale.unwrap_or(rust_i18n::locale().to_string());
-        self.fonts
-            .get(family)
-            .expect(format!("Font family {} not found", family).as_str())
-            .get(locale)
+        if let Some(folder) = self.fonts.get(family) {
+            bevy::log::debug!("Found font family: {}", family);
+            folder.get(locale)
+        } else {
+            bevy::log::debug!("Font {} was not found, using default", family);
+            Handle::<Font>::default()
+        }
     }
 }
+
+/// Hacky resource to signal that fonts are still loading
+#[derive(Debug, Reflect, Default, Resource)]
+#[reflect(Resource)]
+pub(crate) struct FontsLoading;

@@ -12,6 +12,9 @@ categories = ["game-development", "localization"]
 readme = "./README.md"
 exclude = ["assets/"]
 
+[workspace]
+members = ["web"]
+
 [dependencies]
 bevy = { version = "0.15.0-rc.3", default-features = false, features = [
   "bevy_ui",

@@ -155,14 +155,16 @@ fn main() {
     marker_file
         .write_all(
             format!(
-                r#"pub(crate) struct FontFamily {{
+                r#"#[derive(Debug)]
+pub(crate) struct FontFamily {{
     pub path: &'static str,
     pub family: &'static str,
     pub locales: &'static [&'static str],
 }}
 
 {}
-pub (crate) const FONT_FAMILIES: &'static [FontFamily] = &[{}];"#,
+pub(crate) const FONT_FAMILIES: &'static [FontFamily] = &[{}];
+"#,
                 families
                     .iter()
                     .map(|s| s.write())

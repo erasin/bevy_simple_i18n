@@ -1,0 +1,6 @@
+[build]
+public_url = "./"
+
+[serve]
+port = 8080
+addresses = ["0.0.0.0"]

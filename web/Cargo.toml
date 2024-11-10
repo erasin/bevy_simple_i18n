@@ -1,0 +1,8 @@
+[package]
+name = "bevy_i18n_web"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+bevy = { version = "0.15.0-rc.3" }
+bevy_i18n = { path = "../" }
