@@ -40,9 +40,5 @@ name = "basic"
 path = "examples/basic.rs"
 
 [[example]]
-name = "interpolation"
-path = "examples/interpolation.rs"
-
-[[example]]
 name = "changing_locale"
 path = "examples/changing_locale.rs"
