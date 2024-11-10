@@ -8,6 +8,7 @@ use bevy::{
     text::TextFont,
     ui::widget::Text,
 };
+use rust_i18n::t;
 
 use crate::resources::FontManager;
 

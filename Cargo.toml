@@ -21,7 +21,6 @@ rust-i18n = "3"
 [dev-dependencies]
 bevy = { git = "https://github.com/bevyengine/bevy", branch = "main" }
 rust-i18n = "3"
-# bevy-inspector-egui = { git = "https://github.com/Vrixyz/bevy-inspector-egui.git", branch = "bevy_0.15" }
 
 [build-dependencies]
 cargo-emit = "0.2.1"

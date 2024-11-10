@@ -11,16 +11,12 @@ use bevy::{
     text::{Font, TextFont},
     ui::widget::Text,
 };
-use rust_i18n::i18n;
 
 use crate::{
     components::I18nText,
     prelude::I18nFont,
     resources::{FontFolder, FontManager, I18n},
 };
-
-extern crate rust_i18n;
-i18n!("assets/locales");
 
 include!(concat!(env!("OUT_DIR"), "/bevy_i18n.rs"));
 
@@ -57,8 +53,8 @@ fn update_translations(
     mut text_query: Query<(&mut Text, &mut TextFont, Option<&I18nFont>, &I18nText), With<I18nText>>,
 ) {
     for (mut text, mut text_font, dyn_font, key) in text_query.iter_mut() {
-        **text = key.translate();
-        // bevy::log::info!("Text {} | Font {:?}", **text, text_font.font);
+        text.0 = key.translate();
+        // bevy::log::info!("Text {} | {} | Font {:?}", **text, key, text_font.font);
         if let Some(dyn_font) = dyn_font {
             // bevy::log::info!("Updating dynamic font: {} for {}", dyn_font.0, **text);
             text_font.font = font_manager.get(&dyn_font.0, key.locale.clone());

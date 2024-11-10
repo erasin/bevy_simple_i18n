@@ -27,7 +27,7 @@ fn setup(mut commands: Commands, i18n_res: Res<I18n>) {
             ..Default::default()
         })
         .with_children(|parent| {
-            // Basic usage of the i18n text component
+            // Basic usage of the i18n text and font components
             parent
                 .spawn(Node {
                     display: Display::Flex,
