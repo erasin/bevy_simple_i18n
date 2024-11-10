@@ -1,6 +1,6 @@
 use bevy::prelude::*;
 
-use bevy_i18n::prelude::*;
+use bevy_simple_i18n::prelude::*;
 
 fn main() {
     App::new()

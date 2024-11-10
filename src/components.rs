@@ -12,7 +12,7 @@ use rust_i18n::t;
 
 use crate::resources::*;
 
-/// Component for spawning translatable text entities that are managed by `bevy_i18n`
+/// Component for spawning translatable text entities that are managed by `bevy_simple_i18n`
 ///
 /// It automatically inserts (or replaces) a Bevy `Text` component with the translated text using the provided key
 ///
@@ -124,7 +124,7 @@ impl std::fmt::Display for I18nText {
     }
 }
 
-/// Component for spawning dynamic font entities that are managed by `bevy_i18n`
+/// Component for spawning dynamic font entities that are managed by `bevy_simple_i18n`
 ///
 /// The font for the text entity will be automatically updated based on the locale set by the [I18n] resource
 ///

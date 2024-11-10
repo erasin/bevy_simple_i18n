@@ -22,14 +22,14 @@ use crate::{
     resources::{FontFolder, FontManager, FontsLoading, I18n},
 };
 
-include!(concat!(env!("OUT_DIR"), "/bevy_i18n.rs"));
+include!(concat!(env!("OUT_DIR"), "/bevy_simple_i18n.rs"));
 
-/// Initializes the `bevy_i18n` plugin
+/// Initializes the `bevy_simple_i18n` plugin
 ///
 /// # Example
 /// ```
 /// use bevy::prelude::*;
-/// use bevy_i18n::prelude::*;
+/// use bevy_simple_i18n::prelude::*;
 ///
 /// fn main() {
 ///     App::new()

@@ -1,12 +1,12 @@
 [package]
-name = "bevy_i18n"
+name = "bevy_simple_i18n"
 version = "0.1.0"
 edition = "2021"
 authors = ["TurtIeSocks"]
 license = "MIT OR Apache-2.0"
 description = "Bevy i18n plugin"
-repository = "https://github.com/TurtIeSocks/bevy_i18n"
-homepage = "https://github.com/TurtIeSocks/bevy_i18n"
+repository = "https://github.com/TurtIeSocks/bevy_simple_i18n"
+homepage = "https://github.com/TurtIeSocks/bevy_simple_i18n"
 keywords = ["bevy", "gamedev", "i18n", "localization"]
 categories = ["game-development", "localization"]
 readme = "./README.md"

@@ -6,7 +6,7 @@ use std::{
 };
 
 const ASSET_PATH_VAR: &str = "BEVY_ASSET_PATH";
-const OUTPUT_FILE_NAME: &str = "bevy_i18n.rs";
+const OUTPUT_FILE_NAME: &str = "bevy_simple_i18n.rs";
 const ALLOWED_EXTENSIONS: &[&str] = &["otf", "ttf"];
 
 fn main() {

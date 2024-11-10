@@ -1,12 +1,12 @@
-# bevy_i18n
+# bevy_simple_i18n
 
 An opinionated but dead simple internationalization library for the Bevy game engine.
 
 ## Project Status
 
-This project is in the early stages of development and currently acts as a wrapper for the [rust-i18n](https://github.com/longbridgeapp/rust-i18n) library. The long term goal is to implement a more Bevy-native solution. Expect breaking changes.
+This project is mostly just an experiment. It wraps [rust-i18n](https://github.com/longbridgeapp/rust-i18n) library, the long term goal is to implement a more Bevy-native solution. Expect breaking changes.
 
-## [Demo](https://turtiesocks.github.io/bevy_i18n/)
+## [Demo](https://turtiesocks.github.io/bevy_simple_i18n/)
 
 ## Usage
 
@@ -15,7 +15,7 @@ This project is in the early stages of development and currently acts as a wrapp
 Add the following to your `Cargo.toml`:
 
 ```toml
-bevy_i18n = "0.1"
+bevy_simple_i18n = { git = "https://github.com/TurtIeSocks/bevy_simple_i18n", branch = "main" }
 ```
 
 ### main.rs
@@ -137,9 +137,9 @@ fn change_locale(mut i18n: ResMut<I18n>) {
 
 ## Bevy support table
 
-| bevy | bevy_i18n |
-| ---- | --------- |
-| main | 0.1       |
+| bevy | bevy_simple_i18n |
+| ---- | ---------------- |
+| main | 0.1              |
 
 ## Credits
 

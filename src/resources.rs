@@ -11,7 +11,7 @@ use bevy::{
 /// # Example
 /// ```
 /// use bevy::prelude::*;
-/// use bevy_i18n::prelude::*;
+/// use bevy_simple_i18n::prelude::*;
 ///
 /// fn update_locale(mut i18n_res: ResMut<I18n>) {
 ///     i18n_res.set_locale("en");
