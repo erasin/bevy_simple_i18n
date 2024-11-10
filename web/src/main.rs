@@ -20,7 +20,7 @@ fn main() {
                 //     ..Default::default()
                 // })
                 .set(AssetPlugin {
-                    file_path: "../assets".to_string(),
+                    // file_path: "../assets".to_string(),
                     meta_check: bevy::asset::AssetMetaCheck::Never,
                     ..default()
                 }),
