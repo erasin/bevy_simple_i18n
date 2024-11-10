@@ -15,11 +15,21 @@ exclude = ["assets/"]
 [dependencies]
 bevy = { git = "https://github.com/bevyengine/bevy", branch = "main", default-features = false, features = [
   "bevy_ui",
+  "bevy_asset",
+  "bevy_text",
 ] }
 rust-i18n = "3"
 
 [dev-dependencies]
-bevy = { git = "https://github.com/bevyengine/bevy", branch = "main" }
+bevy = { git = "https://github.com/bevyengine/bevy", branch = "main", default-features = false, features = [
+  "bevy_ui",
+  "bevy_asset",
+  "bevy_text",
+  "bevy_render",
+  "bevy_winit",
+  "multi_threaded",
+  "default_font",
+] }
 rust-i18n = "3"
 
 [build-dependencies]
