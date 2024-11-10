@@ -28,7 +28,7 @@ messages.hello:
   es: Hola, %{name}
   fr: Bonjour, %{name}
   de: Hallo, %{name}
-  ja: こんにちは、%{name}
+  ja: '%{name}さん、こんにちは'
   ko: 안녕하세요, %{name}
   pt: Olá, %{name}
   ru: Привет, %{name}
