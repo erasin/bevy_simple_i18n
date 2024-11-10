@@ -6,6 +6,16 @@ use bevy::{
     utils::hashbrown::HashMap,
 };
 
+/// Resource for managing the current locale and getting the available locales
+///
+/// # Example
+/// ```
+/// use bevy::prelude::*;
+/// use bevy_i18n::prelude::*;
+///
+/// fn update_locale(mut i18n_res: ResMut<I18n>) {
+///     i18n_res.set_locale("en");
+/// }
 #[derive(Debug, Resource, Reflect)]
 #[reflect(Resource)]
 pub struct I18n {
@@ -51,6 +61,15 @@ impl std::fmt::Display for I18n {
     }
 }
 
+/// Internal struct for managing fonts for a specific font family.
+///
+/// It attempts to find a specified font for the most specific locale.
+///
+/// If unsuccessful, it will split the locale at the last `-` and try again.
+///
+/// `en-US` -> `en` -> `fallback`
+///
+/// If still unsuccessful, it will return the fallback font.
 #[derive(Debug, Default, Reflect)]
 pub(crate) struct FontFolder {
     pub(crate) fallback: Handle<Font>,
@@ -81,6 +100,7 @@ impl FontFolder {
     }
 }
 
+/// Resource for managing fonts for different font families
 #[derive(Debug, Reflect, Default, Resource)]
 #[reflect(Resource)]
 pub(crate) struct FontManager {
