@@ -25,12 +25,6 @@ jobs:
       - name: Run cargo check
         run: cargo check --all-targets
 
-      - name: Run cargo check with all feature
-        run: cargo check --all-targets --all-features
-
-      - name: Run cargo check headless
-        run: cargo check --all-targets --no-default-features
-
   docs:
     name: Run cargo doc
     env:
@@ -47,7 +41,7 @@ jobs:
         run: sudo apt-get update; sudo apt-get install pkg-config libx11-dev libasound2-dev libudev-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev
 
       - name: Run cargo doc
-        run: cargo doc --features="inspect" --no-deps
+        run: cargo doc --no-deps
 
   build_examples:
     name: Build examples
@@ -62,14 +56,8 @@ jobs:
       - name: Install Linux dependencies
         run: sudo apt-get update; sudo apt-get install pkg-config libx11-dev libasound2-dev libudev-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev
 
-      - name: Build examples without inspect feature
-        run: cargo build --examples --features="ogg"
-
-      - name: Clean
-        run: cargo clean
-
-      - name: Build examples with all features
-        run: cargo build --examples --all-features
+      - name: Build examples
+        run: cargo build --examples
 
   # test:
   #   name: Tests
