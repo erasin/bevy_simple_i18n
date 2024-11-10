@@ -21,15 +21,7 @@ bevy = { version = "0.15.0-rc.3", default-features = false, features = [
 rust-i18n = "3"
 
 [dev-dependencies]
-bevy = { version = "0.15.0-rc.3", default-features = false, features = [
-  "bevy_ui",
-  "bevy_asset",
-  "bevy_text",
-  "bevy_render",
-  "bevy_winit",
-  "multi_threaded",
-  "default_font",
-] }
+bevy = { version = "0.15.0-rc.3" }
 rust-i18n = "3"
 
 [build-dependencies]
