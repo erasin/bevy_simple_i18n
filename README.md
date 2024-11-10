@@ -6,6 +6,8 @@ An opinionated but dead simple internationalization library for the Bevy game en
 
 This project is in the early stages of development and currently acts as a wrapper for the [rust-i18n](https://github.com/longbridgeapp/rust-i18n) library. The long term goal is to implement a more Bevy-native solution. Expect breaking changes.
 
+## [Demo](https://turtiesocks.github.io/bevy_i18n/)
+
 ## Usage
 
 ### Cargo.toml
