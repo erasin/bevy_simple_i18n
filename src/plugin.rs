@@ -4,21 +4,19 @@ use bevy::{
     app::{Plugin, PreStartup, Update},
     asset::{AssetServer, Handle},
     ecs::{
-        query::With,
         schedule::{
             common_conditions::{resource_changed, resource_exists},
             IntoSystemConfigs,
         },
         system::{Commands, Query, Res, ResMut},
     },
-    prelude::resource_removed,
+    prelude::{resource_removed, Without},
     text::{Font, TextFont},
     ui::widget::Text,
 };
 
 use crate::{
-    components::I18nText,
-    prelude::I18nFont,
+    components::{I18nFont, I18nNumber, I18nText},
     resources::{FontFolder, FontManager, FontsLoading, I18n},
 };
 
@@ -101,10 +99,23 @@ fn monitor_font_loading(
 /// whenever the [I18n] resource changes
 fn update_translations(
     font_manager: bevy::ecs::system::Res<FontManager>,
-    mut text_query: Query<(&mut Text, &mut TextFont, Option<&I18nFont>, &I18nText), With<I18nText>>,
+    mut text_query: Query<
+        (&mut Text, &mut TextFont, Option<&I18nFont>, &I18nText),
+        Without<I18nNumber>,
+    >,
+    mut num_query: Query<
+        (&mut Text, &mut TextFont, Option<&I18nFont>, &I18nNumber),
+        Without<I18nText>,
+    >,
 ) {
     bevy::log::debug!("Updating translations");
     for (mut text, mut text_font, dyn_font, key) in text_query.iter_mut() {
+        text.0 = key.translate();
+        if let Some(dyn_font) = dyn_font {
+            text_font.font = font_manager.get(&dyn_font.0, key.locale.clone());
+        }
+    }
+    for (mut text, mut text_font, dyn_font, key) in num_query.iter_mut() {
         text.0 = key.translate();
         if let Some(dyn_font) = dyn_font {
             text_font.font = font_manager.get(&dyn_font.0, key.locale.clone());

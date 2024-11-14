@@ -24,8 +24,8 @@ fn setup(mut commands: Commands) {
             row_gap: Val::Px(20.),
             ..Default::default()
         })
-        .with_children(|parent| {
-            // Basic usage of the i18n text and font components
+        .with_children(|parent: &mut ChildBuilder<'_>| {
+            // Basic usage of the i18n text component
             parent.spawn((
                 // i18n text component with key "hello"
                 I18nText::new("hello"),
@@ -37,6 +37,13 @@ fn setup(mut commands: Commands) {
                     font_size: 40.0,
                     ..default()
                 },
+            ));
+
+            // Basic usage of the i18n number component
+            parent.spawn((
+                // i18n number component
+                I18nNumber::new(24501.20),
+                I18nFont::new("NotoSans"),
             ));
 
             // Interpolation example

@@ -47,7 +47,7 @@ fn setup(mut commands: Commands, i18n_res: Res<I18n>) {
             ..Default::default()
         })
         .with_children(|parent| {
-            // Basic usage of the i18n text and font components
+            // Basic usage of the i18n text component
             parent
                 .spawn(Node {
                     display: Display::Flex,
@@ -55,23 +55,18 @@ fn setup(mut commands: Commands, i18n_res: Res<I18n>) {
                     ..Default::default()
                 })
                 .with_children(|parent| {
-                    parent.spawn((
-                        I18nText::new("hello"),
-                        TextFont {
-                            font_size: 40.0,
-                            ..default()
-                        },
-                        I18nFont::new("NotoSans"),
-                        TextLayout::new_with_justify(JustifyText::Center),
-                    ));
-                    parent.spawn((
-                        Text::new("  <= 'Dynamic Font'"),
-                        TextFont {
-                            font_size: 20.0,
-                            ..default()
-                        },
-                        TextLayout::new_with_justify(JustifyText::Center),
-                    ));
+                    parent.spawn((I18nText::new("hello"), I18nFont::new("NotoSans")));
+                });
+
+            // Basic usage of the i18n number component
+            parent
+                .spawn(Node {
+                    display: Display::Flex,
+                    align_items: AlignItems::Center,
+                    ..Default::default()
+                })
+                .with_children(|parent| {
+                    parent.spawn((I18nNumber::new(24501.20), I18nFont::new("NotoSans")));
                 });
 
             // Example that shows variable interpolation
@@ -84,20 +79,21 @@ fn setup(mut commands: Commands, i18n_res: Res<I18n>) {
                 .with_children(|parent| {
                     parent.spawn((
                         I18nText::new("messages.hello").with_arg("name", "Bevy User"),
-                        TextFont {
-                            font_size: 40.0,
-                            ..default()
-                        },
-                        // I18nFont::new("NotoSans"),
-                        TextLayout::new_with_justify(JustifyText::Center),
+                        I18nFont::new("NotoSans"),
                     ));
+                });
+
+            // Example that shows variable interpolation with a number
+            parent
+                .spawn(Node {
+                    display: Display::Flex,
+                    align_items: AlignItems::Center,
+                    ..Default::default()
+                })
+                .with_children(|parent| {
                     parent.spawn((
-                        Text::new("  <= Bevy Font"),
-                        TextFont {
-                            font_size: 20.0,
-                            ..default()
-                        },
-                        TextLayout::new_with_justify(JustifyText::Center),
+                        I18nText::new("messages.cats").with_num_arg("count", 2000.30),
+                        I18nFont::new("NotoSans"),
                     ));
                 });
 
@@ -109,22 +105,10 @@ fn setup(mut commands: Commands, i18n_res: Res<I18n>) {
                     ..Default::default()
                 })
                 .with_children(|parent| {
+                    parent.spawn((Text::new("Always Japanese: "),));
                     parent.spawn((
                         I18nText::new("hello").with_locale("ja"),
-                        TextFont {
-                            font_size: 40.0,
-                            ..default()
-                        },
                         I18nFont::new("NotoSans"),
-                        TextLayout::new_with_justify(JustifyText::Center),
-                    ));
-                    parent.spawn((
-                        Text::new("  <= Always Japanese"),
-                        TextFont {
-                            font_size: 20.0,
-                            ..default()
-                        },
-                        TextLayout::new_with_justify(JustifyText::Center),
                     ));
                 });
 

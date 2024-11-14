@@ -32,6 +32,7 @@ fn main() {
 fn setup(mut commands: Commands) {
     commands.spawn(Camera2d::default());
     commands.spawn((I18nText::new("hello"), I18nFont::new("NotoSans")));
+    commands.spawn((I18nNumber::new(2503.10), I18nFont::new("NotoSans")));
 }
 ```
 
@@ -60,7 +61,7 @@ Locale files are stored in the `assets/locales` directory. Since we're just usin
 
 ## Features
 
-### Translations
+### Text Translations
 
 To translate text, you can use the `I18nText` component. This component takes a string as an argument and will automatically translate it based on the current locale.
 
@@ -74,10 +75,14 @@ hello:
   ja: こんにちは世界
 ```
 
+### Number Localization
+
+To localize numbers, you can use the `I18nNumber` component. This component will automatically localize the number based on the current locale.
+
 Bevy code:
 
 ```rust
-commands.spawn(I18nText::new("hello"));
+commands.spawn(I18nNumber::new(2350.54));
 ```
 
 ### Interpolation
@@ -92,12 +97,17 @@ messages.hello:
   en: Hello, %{name}
   zh-TW: 你好，%{name}
   ja: こんにちは、%{name}
+messages.cats:
+  en: You have %{count} cats
+  zh-TW: 你有%{count}隻貓
+  ja: あなたは%{count}匹の猫を持っています
 ```
 
 Bevy code:
 
 ```rust
 commands.spawn(I18nText::new("messages.hello").with_arg("name", "world"));
+commands.spawn(I18nText::new("messages.cats").with_num_arg("count", 20));
 ```
 
 ### Dynamic Fonts
