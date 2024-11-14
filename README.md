@@ -75,6 +75,12 @@ hello:
   ja: こんにちは世界
 ```
 
+Bevy code:
+
+```rust
+commands.spawn(I18nText::new("hello"));
+```
+
 ### Number Localization
 
 To localize numbers, you can use the `I18nNumber` component. This component will automatically localize the number based on the current locale.
