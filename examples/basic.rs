@@ -25,7 +25,7 @@ fn setup(mut commands: Commands) {
             ..Default::default()
         })
         .with_children(|parent| {
-            // Basic usage of the i18n text and font components
+            // Basic usage of the i18n text component
             parent.spawn((
                 // i18n text component with key "hello"
                 I18nText::new("hello"),
@@ -38,6 +38,9 @@ fn setup(mut commands: Commands) {
                     ..default()
                 },
             ));
+
+            // Basic usage of the i18n number component
+            parent.spawn((I18nNumber::new(24501.20), I18nFont::new("NotoSans")));
 
             // Interpolation example
             parent.spawn((

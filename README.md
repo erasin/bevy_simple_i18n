@@ -1,5 +1,8 @@
 # bevy_simple_i18n
 
+[![crates.io](https://img.shields.io/crates/v/bevy_simple_i18n)](https://crates.io/crates/bevy_simple_i18n)
+[![license](https://img.shields.io/crates/l/bevy_simple_i18n)](https://github.com/TurtIeSocks/bevy_simple_i18n#license)
+
 An opinionated but dead simple internationalization library for the Bevy game engine.
 
 ## Project Status
@@ -10,12 +13,18 @@ This project wraps [rust-i18n](https://github.com/longbridgeapp/rust-i18n) libra
 
 ## Usage
 
+### CLI
+
+```sh
+cargo add bevy_simple_i18n
+```
+
 ### Cargo.toml
 
 Add the following to your `Cargo.toml`:
 
 ```toml
-bevy_simple_i18n = { git = "https://github.com/TurtIeSocks/bevy_simple_i18n", branch = "main" }
+bevy_simple_i18n = { version = "*" }
 ```
 
 ### main.rs
@@ -32,6 +41,7 @@ fn main() {
 fn setup(mut commands: Commands) {
     commands.spawn(Camera2d::default());
     commands.spawn((I18nText::new("hello"), I18nFont::new("NotoSans")));
+    commands.spawn((I18nNumber::new(2503.10), I18nFont::new("NotoSans")));
 }
 ```
 
@@ -60,7 +70,7 @@ Locale files are stored in the `assets/locales` directory. Since we're just usin
 
 ## Features
 
-### Translations
+### Text Translations
 
 To translate text, you can use the `I18nText` component. This component takes a string as an argument and will automatically translate it based on the current locale.
 
@@ -80,6 +90,16 @@ Bevy code:
 commands.spawn(I18nText::new("hello"));
 ```
 
+### Number Localization
+
+To localize numbers, you can use the `I18nNumber` component. This component will automatically localize the number based on the current locale.
+
+Bevy code:
+
+```rust
+commands.spawn(I18nNumber::new(2350.54));
+```
+
 ### Interpolation
 
 Interpolation is supported using the `I18nText` component. You can interpolate variables by adding tuple (key, value) arguments to the `I18nText` component.
@@ -92,12 +112,17 @@ messages.hello:
   en: Hello, %{name}
   zh-TW: 你好，%{name}
   ja: こんにちは、%{name}
+messages.cats:
+  en: You have %{count} cats
+  zh-TW: 你有%{count}隻貓
+  ja: あなたは%{count}匹の猫を持っています
 ```
 
 Bevy code:
 
 ```rust
 commands.spawn(I18nText::new("messages.hello").with_arg("name", "world"));
+commands.spawn(I18nText::new("messages.cats").with_num_arg("count", 20));
 ```
 
 ### Dynamic Fonts

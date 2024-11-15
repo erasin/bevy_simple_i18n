@@ -5,6 +5,7 @@ use bevy::{
     text::Font,
     utils::hashbrown::HashMap,
 };
+use icu_locid::Locale;
 
 /// Resource for managing the current locale and getting the available locales
 ///
@@ -25,8 +26,14 @@ pub struct I18n {
 
 impl I18n {
     pub fn set_locale(&mut self, locale: impl Into<String>) {
-        self.current = locale.into();
-        rust_i18n::set_locale(&self.current);
+        let next_locale: String = locale.into();
+        if let Err(err) = next_locale.parse::<Locale>() {
+            bevy::log::error!("Invalid locale: {}", err);
+            return;
+        }
+        rust_i18n::set_locale(&next_locale);
+        bevy::log::debug!("Locale changed from {} to {}", self.current, next_locale);
+        self.current = next_locale;
     }
 
     pub fn current(&self) -> &str {
@@ -47,17 +54,6 @@ impl Default for I18n {
                 .map(|s| s.into())
                 .collect(),
         }
-    }
-}
-
-impl std::fmt::Display for I18n {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(
-            f,
-            "i18n | current: {}, locales: {:?}",
-            self.current,
-            self.locales.join(",")
-        )
     }
 }
 
