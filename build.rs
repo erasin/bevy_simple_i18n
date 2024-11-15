@@ -105,20 +105,6 @@ fn main() {
                             locale,
                             ext,
                         });
-
-                        // cargo_emit::warning!("{} {} {}", file_name, extension, folder);
-                        // if let Some(family) = path.parent() {
-                        //     let family = family.to_string_lossy().to_string();
-                        //     if let Some(locale) = full_path.file_stem() {
-                        //         let locale = locale.to_string_lossy().to_string();
-                        //         files.push(FontAsset {
-                        //             is_fallback: locale == family,
-                        //             path: string_path,
-                        //             family,
-                        //             locale,
-                        //         });
-                        //     }
-                        // }
                     }
                 }
             });

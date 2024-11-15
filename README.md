@@ -1,5 +1,8 @@
 # bevy_simple_i18n
 
+[![crates.io](https://img.shields.io/crates/v/bevy_simple_i18n)](https://crates.io/crates/bevy_simple_i18n)
+[![license](https://img.shields.io/crates/l/bevy_simple_i18n)](https://github.com/TurtIeSocks/bevy_simple_i18n#license)
+
 An opinionated but dead simple internationalization library for the Bevy game engine.
 
 ## Project Status
@@ -10,12 +13,18 @@ This project wraps [rust-i18n](https://github.com/longbridgeapp/rust-i18n) libra
 
 ## Usage
 
+### CLI
+
+```sh
+cargo add bevy_simple_i18n
+```
+
 ### Cargo.toml
 
 Add the following to your `Cargo.toml`:
 
 ```toml
-bevy_simple_i18n = { git = "https://github.com/TurtIeSocks/bevy_simple_i18n", branch = "main" }
+bevy_simple_i18n = { version = "*" }
 ```
 
 ### main.rs

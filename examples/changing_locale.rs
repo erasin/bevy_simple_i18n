@@ -35,6 +35,7 @@ fn setup(mut commands: Commands, i18n_res: Res<I18n>) {
                     ..Default::default()
                 })
                 .with_children(|parent| {
+                    parent.spawn(Text::new("'hello' => "));
                     parent.spawn((I18nText::new("hello"), I18nFont::new("NotoSans")));
                 });
 
@@ -46,6 +47,7 @@ fn setup(mut commands: Commands, i18n_res: Res<I18n>) {
                     ..Default::default()
                 })
                 .with_children(|parent| {
+                    parent.spawn(Text::new("24501.20 => "));
                     parent.spawn((I18nNumber::new(24501.20), I18nFont::new("NotoSans")));
                 });
 
@@ -57,6 +59,7 @@ fn setup(mut commands: Commands, i18n_res: Res<I18n>) {
                     ..Default::default()
                 })
                 .with_children(|parent| {
+                    parent.spawn(Text::new("'hello, %{name}' => "));
                     parent.spawn((
                         I18nText::new("messages.hello").with_arg("name", "Bevy User"),
                         I18nFont::new("NotoSans"),
@@ -71,6 +74,7 @@ fn setup(mut commands: Commands, i18n_res: Res<I18n>) {
                     ..Default::default()
                 })
                 .with_children(|parent| {
+                    parent.spawn(Text::new("'You have %{count} cats' => "));
                     parent.spawn((
                         I18nText::new("messages.cats").with_num_arg("count", 2000.30),
                         I18nFont::new("NotoSans"),
