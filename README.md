@@ -7,7 +7,7 @@ An opinionated but dead simple internationalization library for the Bevy game en
 
 ## Project Status
 
-This project wraps [rust-i18n](https://github.com/longbridgeapp/rust-i18n) library and is therefore not very "Bevy" like. The `rust-i18n` library embeds all of your locales via macros at compile time, while this is incredibly convenient, it isn't always always desirable for game development. I have attempted to wrap the library in the most Bevy way I could but the long term goal is to create a more Bevy-like internationalization library, so this is mostly a proof of concept and you should expect breaking changes.
+This project wraps [rust-i18n](https://github.com/longbridgeapp/rust-i18n) library and is therefore not very "Bevy" like. The `rust-i18n` library embeds all of your locales via macros at compile time, while this is incredibly convenient, it isn't always desirable for game development. I have attempted to wrap the library in the most Bevy way I could but the long term goal is to create a more Bevy-like internationalization library, so this is mostly a proof of concept and you should expect breaking changes.
 
 ## [Demo](https://turtiesocks.github.io/bevy_simple_i18n/)
 
