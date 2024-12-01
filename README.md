@@ -164,7 +164,7 @@ fn change_locale(mut i18n: ResMut<I18n>) {
 
 | bevy | bevy_simple_i18n |
 | ---- | ---------------- |
-| main | 0.1              |
+| 0.15 | 0.1              |
 
 ## Credits
 
