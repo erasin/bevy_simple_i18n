@@ -16,6 +16,8 @@ fn main() {
 
     let mut files = Vec::new();
 
+    let mut marker_file = File::create(Path::new(&out_dir).join(OUTPUT_FILE_NAME)).unwrap();
+
     // Check if env variable is set for the assets folder
     if let Some(dir) = env::var(ASSET_PATH_VAR)
         .ok()
@@ -68,6 +70,18 @@ fn main() {
     {
         cargo_emit::rerun_if_changed!(dir.to_string_lossy());
         // cargo_emit::warning!("Asset folder found: {}", dir.to_string_lossy());
+
+        marker_file
+            .write_all(
+                format!(
+                    r#"rust_i18n::i18n!("{}");
+
+"#,
+                    dir.to_string_lossy().replace('\\', "/"),
+                )
+                .as_bytes(),
+            )
+            .unwrap();
 
         let building_for_wasm = std::env::var("CARGO_CFG_TARGET_ARCH") == Ok("wasm32".to_string());
 
@@ -136,7 +150,6 @@ fn main() {
             });
         }
     }
-    let mut marker_file = File::create(Path::new(&out_dir).join(OUTPUT_FILE_NAME)).unwrap();
 
     marker_file
         .write_all(

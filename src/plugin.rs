@@ -18,9 +18,8 @@ use bevy::{
 use crate::{
     components::{I18nFont, I18nNumber, I18nText},
     resources::{FontFolder, FontManager, FontsLoading, I18n},
+    FONT_FAMILIES,
 };
-
-include!(concat!(env!("OUT_DIR"), "/bevy_simple_i18n.rs"));
 
 /// Initializes the `bevy_simple_i18n` plugin
 ///

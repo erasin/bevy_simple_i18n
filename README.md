@@ -47,7 +47,7 @@ fn setup(mut commands: Commands) {
 
 ## File Structure
 
-In order to use this plugin you'll need to set up your asset folder in the following way:
+In order to use this plugin, the following folder structure is recommended:
 
 ```ts
 .
@@ -66,7 +66,7 @@ In order to use this plugin you'll need to set up your asset folder in the follo
 
 ## Locale Files
 
-Locale files are stored in the `assets/locales` directory. Since we're just using the `rust-i18n` library, the format is the same. You can find more information on the supported formats [here](https://github.com/longbridgeapp/rust-i18n?tab=readme-ov-file#locale-file).
+Locale files can technically be put anywhere in your `assets` folder and this crate should find them. Since we're just using the `rust-i18n` library, the format is the same. You can find more information on the supported formats [here](https://github.com/longbridgeapp/rust-i18n?tab=readme-ov-file#locale-file).
 
 ## Features
 
