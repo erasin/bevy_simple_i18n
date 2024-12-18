@@ -43,7 +43,6 @@ impl Component for I18nFont {
                 .get_resource::<FontManager>()
                 .expect("Font manager has not been initialized");
 
-            // let x = world.query(state)
             let locale = if let Some(i18n_text) = world.get::<I18nText>(entity) {
                 i18n_text.locale()
             } else if let Some(i18n_number) = world.get::<I18nNumber>(entity) {
