@@ -10,9 +10,8 @@ use bevy::{
 
 #[cfg(feature = "numbers")]
 use fixed_decimal::FixedDecimal;
-use rust_i18n::t;
 
-use super::I18nComponent;
+use super::{utils::translate_by_key, I18nComponent};
 
 /// Component for spawning translatable text entities that are managed by `bevy_simple_i18n`
 ///
@@ -61,27 +60,7 @@ impl I18nComponent for I18nText {
     }
 
     fn translate(&self) -> String {
-        let locale = self.locale();
-
-        #[cfg(feature = "numbers")]
-        let fdf = super::utils::get_formatter(&locale, &self.key);
-
-        let (patterns, values): (Vec<&str>, Vec<String>) = self
-            .args
-            .iter()
-            .map(|(k, interpolation_type)| {
-                let value = match interpolation_type {
-                    InterpolationType::String(v) => v.clone(),
-                    #[cfg(feature = "numbers")]
-                    InterpolationType::Number(v) => fdf.format_to_string(&v),
-                };
-                (k.as_str(), value)
-            })
-            .unzip();
-        let translated = t!(&self.key, locale = locale);
-
-        let val = rust_i18n::replace_patterns(&translated, patterns.as_slice(), values.as_slice());
-        val
+        translate_by_key(&self.locale(), &self.key, &self.args)
     }
 }
 
