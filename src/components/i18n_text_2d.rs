@@ -9,7 +9,7 @@ use bevy::{
 };
 use rust_i18n::t;
 
-use super::InterpolationType;
+use super::{I18nComponent, InterpolationType};
 
 /// Component for spawning translatable text 2d entities that are managed by `bevy_simple_i18n`
 ///
@@ -50,6 +50,38 @@ pub struct I18nText2d {
     pub(crate) locale: Option<String>,
 }
 
+impl I18nComponent for I18nText2d {
+    fn locale(&self) -> String {
+        self.locale
+            .clone()
+            .unwrap_or(rust_i18n::locale().to_string())
+    }
+
+    fn translate(&self) -> String {
+        let locale = self.locale();
+
+        #[cfg(feature = "numbers")]
+        let fdf = super::utils::get_formatter(&locale, &self.key);
+
+        let (patterns, values): (Vec<&str>, Vec<String>) = self
+            .args
+            .iter()
+            .map(|(k, interpolation_type)| {
+                let value = match interpolation_type {
+                    InterpolationType::String(v) => v.clone(),
+                    #[cfg(feature = "numbers")]
+                    InterpolationType::Number(v) => fdf.format_to_string(v),
+                };
+                (k.as_str(), value)
+            })
+            .unzip();
+        let translated = t!(&self.key, locale = locale);
+
+        let val = rust_i18n::replace_patterns(&translated, patterns.as_slice(), values.as_slice());
+        val
+    }
+}
+
 impl I18nText2d {
     /// Creates a new [I18nText2d] component with the provided translation key
     pub fn new(str: impl Into<String>) -> Self {
@@ -85,33 +117,6 @@ impl I18nText2d {
             InterpolationType::Number(super::utils::f64_to_fd(value.into())),
         ));
         self
-    }
-
-    /// Internal method that wraps the `rust_i18n::t!` macro
-    pub(crate) fn translate(&self) -> String {
-        #[cfg(feature = "numbers")]
-        let fdf = super::utils::get_formatter(&self.locale, &self.key);
-
-        let (patterns, values): (Vec<&str>, Vec<String>) = self
-            .args
-            .iter()
-            .map(|(k, interpolation_type)| {
-                let value = match interpolation_type {
-                    InterpolationType::String(v) => v.clone(),
-                    #[cfg(feature = "numbers")]
-                    InterpolationType::Number(v) => fdf.format_to_string(v),
-                };
-                (k.as_str(), value)
-            })
-            .unzip();
-        let translated = if let Some(locale) = self.locale.as_ref() {
-            t!(&self.key, locale = locale)
-        } else {
-            t!(&self.key)
-        };
-
-        let val = rust_i18n::replace_patterns(&translated, patterns.as_slice(), values.as_slice());
-        val
     }
 }
 

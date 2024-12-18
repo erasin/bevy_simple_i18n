@@ -5,24 +5,15 @@ pub(super) fn f64_to_fd(value: f64) -> fixed_decimal::FixedDecimal {
 }
 
 #[cfg(feature = "numbers")]
-pub(super) fn resolve_locale(locale: &Option<String>, label: impl ToString) -> icu_locid::Locale {
-    let string_locale = locale
-        .clone()
-        .unwrap_or_else(|| rust_i18n::locale().to_string());
-
-    string_locale.parse().expect(
-        format!(
-            "Invalid locale: {} for key: {}",
-            string_locale,
-            label.to_string()
-        )
-        .as_str(),
-    )
+pub(super) fn resolve_locale(locale: &String, label: impl ToString) -> icu_locid::Locale {
+    locale
+        .parse()
+        .expect(format!("Invalid locale: {} for key: {}", locale, label.to_string()).as_str())
 }
 
 #[cfg(feature = "numbers")]
 pub(super) fn get_formatter(
-    locale: &Option<String>,
+    locale: &String,
     label: impl ToString,
 ) -> icu_decimal::FixedDecimalFormatter {
     let label_string = label.to_string();

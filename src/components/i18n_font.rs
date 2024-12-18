@@ -9,11 +9,10 @@ use bevy::{
 };
 
 use crate::{
-    components::{i18n_text_2d::I18nText2d, I18nNumber},
+    components::{I18nNumber, I18nText, I18nText2d},
+    prelude::I18nComponent,
     resources::*,
 };
-
-use super::I18nText;
 
 /// Component for spawning dynamic font entities that are managed by `bevy_simple_i18n`
 ///
@@ -44,14 +43,15 @@ impl Component for I18nFont {
                 .get_resource::<FontManager>()
                 .expect("Font manager has not been initialized");
 
+            // let x = world.query(state)
             let locale = if let Some(i18n_text) = world.get::<I18nText>(entity) {
-                i18n_text.locale.clone()
+                i18n_text.locale()
             } else if let Some(i18n_number) = world.get::<I18nNumber>(entity) {
-                i18n_number.locale.clone()
+                i18n_number.locale()
             } else if let Some(i18n_text_2d) = world.get::<I18nText2d>(entity) {
-                i18n_text_2d.locale.clone()
+                i18n_text_2d.locale()
             } else {
-                None
+                rust_i18n::locale().to_string()
             };
 
             let val = world.get::<Self>(entity).unwrap().clone();
