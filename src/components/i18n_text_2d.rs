@@ -118,7 +118,7 @@ impl Component for I18nText2d {
     fn register_component_hooks(_hooks: &mut ComponentHooks) {
         _hooks.on_add(|mut world, entity, _| {
             let val = world.get::<Self>(entity).unwrap().clone();
-            debug!("Adding i18n text: {}", val.key);
+            debug!("Adding i18n text 2d: {}", val.key);
             if let Some(mut text) = world.get_mut::<Text2d>(entity) {
                 **text = val.translate();
             } else {
