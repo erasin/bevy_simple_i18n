@@ -160,6 +160,20 @@ fn change_locale(mut i18n: ResMut<I18n>) {
 }
 ```
 
+## Traits
+
+### `I18nComponent`
+
+Implementing this trait for your component makes it eligible to register it and enable automatic re-translations. See [Example Implementation](./src/components/i18n_number.rs) for an example.
+
+### `I18nComponentRegistration`
+
+This trait enables the `register_i18n_component` method on your Bevy App. Registering your components with this method will allow the plugin to automatically update the components when the locale is changed, requires your component to implement the `I18nComponent` trait. Unfortunately, this does not work with the Dynamic Font feature yet.
+
+```rust
+  app.register_i18n_component::<I18nText>();
+```
+
 ## Bevy support table
 
 | bevy | bevy_simple_i18n |

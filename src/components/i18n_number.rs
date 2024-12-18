@@ -9,7 +9,7 @@ use bevy::{
 };
 use fixed_decimal::FixedDecimal;
 
-use super::utils;
+use super::{utils, I18nComponent};
 
 /// Component for spawning translatable number entities that are managed by `bevy_simple_i18n`
 ///
@@ -37,6 +37,19 @@ pub struct I18nNumber {
     pub(crate) locale: Option<String>,
 }
 
+impl I18nComponent for I18nNumber {
+    fn locale(&self) -> String {
+        self.locale
+            .clone()
+            .unwrap_or(rust_i18n::locale().to_string())
+    }
+
+    fn translate(&self) -> String {
+        utils::get_formatter(&self.locale(), &self.fixed_decimal)
+            .format_to_string(&self.fixed_decimal)
+    }
+}
+
 impl I18nNumber {
     /// Creates a new `I18nNumber` component with the provided number value
     pub fn new(number: impl Into<f64>) -> Self {
@@ -50,11 +63,6 @@ impl I18nNumber {
     pub fn with_locale(mut self, locale: impl Into<String>) -> Self {
         self.locale = Some(locale.into());
         self
-    }
-
-    pub(crate) fn translate(&self) -> String {
-        utils::get_formatter(&self.locale, &self.fixed_decimal)
-            .format_to_string(&self.fixed_decimal)
     }
 }
 

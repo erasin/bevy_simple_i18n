@@ -110,8 +110,7 @@ impl FontManager {
         self.fonts.insert(family, font_folder);
     }
 
-    pub(crate) fn get(&self, family: &str, locale: Option<String>) -> Handle<Font> {
-        let locale = locale.unwrap_or(rust_i18n::locale().to_string());
+    pub(crate) fn get(&self, family: &str, locale: String) -> Handle<Font> {
         if let Some(folder) = self.fonts.get(family) {
             bevy::log::debug!("Found font family: {}", family);
             folder.get(locale)
