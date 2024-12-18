@@ -1,12 +1,15 @@
-use super::InterpolationType;
 use bevy::{
-    ecs::component::{Component, ComponentHooks, StorageType},
+    ecs::{
+        component::{Component, ComponentHooks, StorageType},
+        reflect::ReflectComponent,
+    },
     log::debug,
-    prelude::ReflectComponent,
     reflect::Reflect,
     text::Text2d,
 };
 use rust_i18n::t;
+
+use super::InterpolationType;
 
 /// Component for spawning translatable text 2d entities that are managed by `bevy_simple_i18n`
 ///
