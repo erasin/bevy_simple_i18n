@@ -8,7 +8,10 @@ use bevy::{
     text::TextFont,
 };
 
-use crate::{components::I18nNumber, resources::*};
+use crate::{
+    components::{i18n_text_2d::I18nText2d, I18nNumber},
+    resources::*,
+};
 
 use super::I18nText;
 
@@ -45,6 +48,8 @@ impl Component for I18nFont {
                 i18n_text.locale.clone()
             } else if let Some(i18n_number) = world.get::<I18nNumber>(entity) {
                 i18n_number.locale.clone()
+            } else if let Some(i18n_text_2d) = world.get::<I18nText2d>(entity) {
+                i18n_text_2d.locale.clone()
             } else {
                 None
             };
