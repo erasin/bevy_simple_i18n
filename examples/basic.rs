@@ -54,4 +54,20 @@ fn setup(mut commands: Commands) {
                 I18nFont::new("NotoSans"),
             ));
         });
+
+        // Basic usage of the Text2d implementation
+        commands.spawn((
+            // I18nText2d component with key "text2d"
+            I18nText2d::new("text2d"),
+            // Dynamic font component with font family "NotoSans" that auto loads font files based on the set locale
+            I18nFont::new("NotoSans"),
+            // You can still insert a TextFont component though
+            // Keep in mind that the "font" field will be overridden by the I18nFont component
+            TextFont {
+                font_size: 40.0,
+                ..default()
+            },
+            // Since we're using Text2d, we add a Transform to set its position
+            Transform::from_xyz(300., 300., 0.)
+        ));
 }
