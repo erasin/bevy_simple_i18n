@@ -1,6 +1,6 @@
 use bevy::{
     ecs::{
-        component::{Component, ComponentHooks, StorageType},
+        component::{Component, ComponentHook, HookContext, Mutable, StorageType},
         reflect::ReflectComponent,
     },
     log::debug,
@@ -36,9 +36,10 @@ impl I18nFont {
 
 impl Component for I18nFont {
     const STORAGE_TYPE: StorageType = StorageType::Table;
+    type Mutability = Mutable;
 
-    fn register_component_hooks(_hooks: &mut ComponentHooks) {
-        _hooks.on_add(|mut world, entity, _| {
+    fn on_add() -> Option<ComponentHook> {
+        Some(|mut world, HookContext { entity, .. }| {
             let font_manager = world
                 .get_resource::<FontManager>()
                 .expect("Font manager has not been initialized");
@@ -65,6 +66,6 @@ impl Component for I18nFont {
                     ..Default::default()
                 });
             }
-        });
+        })
     }
 }

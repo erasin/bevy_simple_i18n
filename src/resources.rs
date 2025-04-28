@@ -1,9 +1,9 @@
 use bevy::{
     asset::Handle,
-    ecs::{reflect::ReflectResource, system::Resource},
+    ecs::{reflect::ReflectResource, resource::Resource},
+    platform::collections::HashMap,
     reflect::Reflect,
     text::Font,
-    utils::hashbrown::HashMap,
 };
 use icu_locid::Locale;
 

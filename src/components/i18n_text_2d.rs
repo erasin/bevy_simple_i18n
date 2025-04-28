@@ -1,6 +1,6 @@
 use bevy::{
     ecs::{
-        component::{Component, ComponentHooks, StorageType},
+        component::{Component, ComponentHook, HookContext, Mutable, StorageType},
         reflect::ReflectComponent,
     },
     log::debug,
@@ -101,9 +101,10 @@ impl I18nText2d {
 
 impl Component for I18nText2d {
     const STORAGE_TYPE: StorageType = StorageType::Table;
+    type Mutability = Mutable;
 
-    fn register_component_hooks(_hooks: &mut ComponentHooks) {
-        _hooks.on_add(|mut world, entity, _| {
+    fn on_add() -> Option<ComponentHook> {
+        Some(|mut world, HookContext { entity, .. }| {
             let val = world.get::<Self>(entity).unwrap().clone();
             debug!("Adding i18n text 2d: {}", val.key);
             if let Some(mut text) = world.get_mut::<Text2d>(entity) {
@@ -114,6 +115,6 @@ impl Component for I18nText2d {
                     .entity(entity)
                     .insert(Text2d::new(val.translate()));
             }
-        });
+        })
     }
 }

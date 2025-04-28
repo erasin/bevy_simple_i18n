@@ -7,7 +7,7 @@ use bevy::{
         component::Component,
         schedule::{
             common_conditions::{resource_changed, resource_exists, resource_removed},
-            IntoSystemConfigs,
+            IntoScheduleConfigs,
         },
         system::{Commands, Query, Res, ResMut},
     },
